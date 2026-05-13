@@ -24,11 +24,12 @@ body {
   cursor: none;
 }
 
-/* ─── CUSTOM CURSOR ─────────────────────── */
+/* ─── CUSTOM CURSOR (LAPTOP/PC ONLY) ─────────────────────── */
 #cursor-outer {
   position: fixed;
-  width: 38px; height: 38px;
-  border: 2px solid rgba(107, 15, 26, 0.5);
+  width: 38px;
+  height: 38px;
+  border: 2px solid rgba(107, 15, 26, 0.5); /* Warna merah gelap sesuai tema */
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -36,17 +37,42 @@ body {
   transition: transform 0.18s ease, width 0.2s, height 0.2s, background 0.2s;
   backdrop-filter: blur(4px);
   background: rgba(255, 255, 255, 0.08);
+  opacity: 0; /* Sembunyi dulu sebelum mouse gerak */
 }
+
 #cursor-star {
   position: fixed;
-  width: 14px; height: 14px;
+  width: 14px;
+  height: 14px;
   pointer-events: none;
   z-index: 100000;
   transform: translate(-50%, -50%);
   transition: transform 0.32s cubic-bezier(.23, 1, .32, 1);
+  opacity: 0;
 }
-#cursor-star svg { width: 14px; height: 14px; }
-body:hover #cursor-outer { opacity: 1; }
+
+#cursor-star svg {
+  width: 14px;
+  height: 14px;
+  fill: #6b0f1a; /* Warna bintang */
+}
+
+/* Munculkan kursor saat mouse di atas body */
+body:hover #cursor-outer,
+body:hover #cursor-star {
+  opacity: 1;
+}
+
+/* ─── MATIKAN KURSOR DI HP (TOUCHSCREEN) ─────────────────── */
+/* Kode ini wajib ada supaya di HP gak muncul kursor aneh */
+@media (pointer: coarse) {
+  #cursor-outer,
+  #cursor-star {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0 !important;
+  }
+}
 
 /* ─── PAGES ──────────────────────────────── */
 .page          { display: none; min-height: 100vh; }
@@ -919,4 +945,21 @@ a.socmed-input-row {
   .profile-card   { flex-direction: column; }
   .member-photo-wrap img { width: 100%; height: 240px; }
   .modal-box      { width: 92vw; padding: 32px 24px; }
+}
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Kode untuk besarin foto */
+.profile-img {
+    width: 350px; /* Ukuran bisa kamu ganti sesuai selera */
+    height: 350px;
+    border-radius: 50%; /* Biar bulat */
+    object-fit: cover;
+    border: 5px solid white;
+    margin-top: 50px;
 }
